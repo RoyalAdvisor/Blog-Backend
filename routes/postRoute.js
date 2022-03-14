@@ -8,7 +8,7 @@ dotenv.config();
 
 //Blog posts
 
-router.get("/", verifyAcc, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const posts = await post.find();
     res.send(posts);
@@ -17,7 +17,7 @@ router.get("/", verifyAcc, async (req, res) => {
   }
 });
 
-router.get("/:id", [verifyAcc, retrievePost], (req, res) => {
+router.get("/:id", retrievePost, (req, res) => {
   res.send(res.post);
 });
 
