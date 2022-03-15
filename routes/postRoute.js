@@ -21,7 +21,7 @@ router.get("/:id", retrievePost, (req, res) => {
   res.send(res.post);
 });
 
-router.post("/", [verifyAcc, retrieveUser], async (req, res) => {
+router.post("/create", [verifyAcc, retrieveUser], async (req, res) => {
   let userName = res.user.username;
   const newPost = new post({
     main_image: req.body.main_image,
@@ -40,7 +40,7 @@ router.post("/", [verifyAcc, retrieveUser], async (req, res) => {
 });
 
 router.put(
-  "/:id",
+  "/update/:id",
   [verifyAcc, retrievePost, retrieveUser],
   async (req, res) => {
     if (res.user.username !== res.post.created_by) {
@@ -64,7 +64,7 @@ router.put(
 );
 
 router.delete(
-  "/:id",
+  "/delete/:id",
   [verifyAcc, retrievePost, retrieveUser],
   async (req, res) => {
     if (res.user.username !== res.post.created_by) {
