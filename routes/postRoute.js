@@ -40,7 +40,7 @@ router.post("/create", [verifyAcc, retrieveUser], async (req, res) => {
 });
 
 router.put(
-  "/update/:id",
+  "/:id/update",
   [verifyAcc, retrievePost, retrieveUser],
   async (req, res) => {
     if (res.user.username !== res.post.created_by) {
@@ -64,7 +64,7 @@ router.put(
 );
 
 router.delete(
-  "/delete/:id",
+  "/:id/delete",
   [verifyAcc, retrievePost, retrieveUser],
   async (req, res) => {
     if (res.user.username !== res.post.created_by) {
