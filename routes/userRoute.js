@@ -50,17 +50,16 @@ router.post("/signin", async (req, res) => {
 
 //Get User
 router.get("/", async (req, res) => {
-  try {
-    const user = await user.find();
-    res.send(user);
-  } catch (error) {
-    res.status(500).send({ message: error.message });
-  }
+  const findUsers = await user.find();
+  if (!findUsers) return res.sendStatus(404);
+  res.send(findUsers);
 });
 
 //Get User by ID
-router.get("/:id", retrieveUser, (req, res) => {
-  res.send(res.user);
+router.get("/:id", verifyAcc, (req, res) => {
+  const findUser = await user.findById(req.params.id);
+  if (!findUser) return res.sendStatus(404);
+  res.send(findUser);
 });
 
 //Update
