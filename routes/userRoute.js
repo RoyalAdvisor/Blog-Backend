@@ -48,7 +48,23 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-//Get User Profile
+//Get Users
+
+router.get("/", async (req, res) => {
+  try {
+    const users = await user.find();
+    res.send(users);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
+
+//Get User By ID
+router.get("/:id", retrieveUser, (req, res) => {
+  const findUser = await user.findById(req.params.id);
+  if (!findUser) return res.status(404).send({ message: "User not found" });
+  res.send(findUser);
+});
 
 //Update
 
