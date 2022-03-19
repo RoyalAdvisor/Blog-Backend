@@ -36,25 +36,34 @@ router.post(
 );
 
 router.delete(
-  "/:id/comments/delete",
+  "/:id/comments/delete/:comment_id",
   [verifyAcc, retrievePost, retrieveUser],
   async (req, res) => {
     let storedComments = res.post.comments;
-    let index = null;
+    storedComments.forEach((comment) => {
+      if (
+        comment._id.toString().replace(/['"]/g, "") !== req.params.comment_id
+      ) {
+        comment.toDelete = true;
+      }
+    });
+    const newComments = storedComments.filter((comment) => !comment.toDelete);
     try {
-      storedComments.forEach((comment) => {
-        index = comment._id.valueOf();
-        if (res.user._id.valueOf() !== comment.userId.valueOf()) {
-          return res
-            .status(404)
-            .send({ message: "You cannot delete this comment." });
-        } else {
-          console.log("authorized");
-          if (index !== null) storedComments.splice(index, 1);
-        }
-      });
-      await res.post.save(storedComments);
-      res.status(200);
+      // storedComments.forEach((comment) => {
+      //   index = comment._id.valueOf();
+      //   if (res.user._id.valueOf() !== comment.userId.valueOf()) {
+      //     return res
+      //       .status(404)
+      //       .send({ message: "You cannot delete this comment." });
+      //   } else {
+      //     console.log("authorized");
+      //     if (index !== null) storedComments.splice(index, 1);
+      //   }
+      // });
+      res.post.comments = newComments;
+      res.post.markModified("comments");
+      const updatedPost = await res.post.save();
+      res.status(200).send(updatedPost.comments);
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
