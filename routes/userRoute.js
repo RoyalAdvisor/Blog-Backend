@@ -1,5 +1,5 @@
-// const dotenv = require("dotenv");
-// dotenv.config();
+const dotenv = require("dotenv");
+dotenv.config();
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -48,19 +48,7 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-//Get User
-router.get("/", async (req, res) => {
-  const findUsers = await user.find();
-  if (!findUsers) return res.sendStatus(404);
-  res.send(findUsers);
-});
-
-//Get User by ID
-router.get("/:id", verifyAcc, (req, res) => {
-  const findUser = await user.findById(req.params.id);
-  if (!findUser) return res.sendStatus(404);
-  res.send(findUser);
-});
+//Get User Profile
 
 //Update
 
