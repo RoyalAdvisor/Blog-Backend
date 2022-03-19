@@ -1,5 +1,5 @@
-// const dotenv = require("dotenv");
-// dotenv.config();
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -17,6 +17,7 @@ mongoose.connect(process.env.connection, { useNewUrlParser: true }, () => {
 
 app.use("/users", userRoute);
 app.use("/posts", postRoute);
+app.use(cors());
 app.use("/posts", commentRoute);
 
 app.get("/", (req, res) => {
