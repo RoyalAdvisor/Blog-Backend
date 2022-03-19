@@ -48,6 +48,21 @@ router.post("/signin", async (req, res) => {
   }
 });
 
+//Get User
+router.get("/", async (req, res) => {
+  try {
+    const user = await user.find();
+    res.send(user);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
+
+//Get User by ID
+router.get("/:id", retrieveUser, (req, res) => {
+  res.send(res.user);
+});
+
 //Update
 
 router.put("/:id", [verifyAcc, retrieveUser], async (req, res) => {
