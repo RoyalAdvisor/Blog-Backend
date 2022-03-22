@@ -42,7 +42,7 @@ router.delete(
     let storedComments = res.post.comments;
     storedComments.forEach((comment) => {
       if (
-        comment._id.toString().replace(/['"]/g, "") !== req.params.comment_id
+        comment._id.toString().replace(/['"]/g, "") == req.params.comment_id
       ) {
         comment.toDelete = true;
       }
