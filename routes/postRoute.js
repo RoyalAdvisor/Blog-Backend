@@ -10,7 +10,7 @@ dotenv.config();
 
 router.get("/", async (req, res) => {
   try {
-    const posts = await post.find();
+    const posts = await post.find().sort("desc");
     res.send(posts);
   } catch (error) {
     res.status(500).send({ message: error.message });
