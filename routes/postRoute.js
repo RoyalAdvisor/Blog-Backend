@@ -23,12 +23,14 @@ router.get("/:id", retrievePost, (req, res) => {
 
 router.post("/create", [verifyAcc, retrieveUser], async (req, res) => {
   let userName = res.user.username;
+  let userProfile = res.user.profile;
   const newPost = new post({
     main_image: req.body.main_image,
     title: req.body.title,
     subtitle: req.body.subtitle,
     desc: req.body.desc,
     created_by: userName,
+    user_image: userProfile,
   });
   try {
     await newPost.save();
