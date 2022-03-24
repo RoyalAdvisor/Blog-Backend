@@ -41,6 +41,7 @@ router.post("/signin", async (req, res) => {
         username: user.username,
         email: user.email,
         access: authToken,
+        profileImage: user.profileImage,
       });
     });
   } catch (error) {
