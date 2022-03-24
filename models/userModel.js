@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema(
     profile: {
       type: String,
       required: false,
-      default: "https://postimg.cc/SnLFb5R1",
     },
   },
   { timestamps: true }

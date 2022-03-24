@@ -17,6 +17,7 @@ router.post("/signup", verify, async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: passEncryption,
+      profile: req.body.profile,
     });
     await newUser.save();
     res.status(200).send({ message: "Successfully created new user" });
