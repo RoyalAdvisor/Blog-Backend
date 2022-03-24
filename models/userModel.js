@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
     },
     profile: {
       type: String,
-      required: false,
+      required: true,
       maxLength: 1000,
       default: "",
     },
