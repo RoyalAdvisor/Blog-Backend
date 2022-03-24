@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       maxLength: 1000,
-      default: "",
+      default: "https://i.postimg.cc/CxXFkpg0/abstract-user-flat-4.png",
     },
   },
   { timestamps: true }
