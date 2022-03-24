@@ -41,7 +41,6 @@ router.post("/signin", async (req, res) => {
         username: user.username,
         email: user.email,
         access: authToken,
-        profileImage: user.profileImage,
       });
     });
   } catch (error) {
@@ -52,14 +51,8 @@ router.post("/signin", async (req, res) => {
 //Update
 
 router.put("/:id", [verifyAcc, retrieveUser], async (req, res) => {
-  const newPassword = bcrypt.hashSync(req.body.password, 8);
   if (req.body.username != null) res.user.username = req.body.username;
   if (req.body.email != null) res.user.email = req.body.email;
-  if (req.body.password != null) {
-    req.user.password = newPassword;
-  }
-  if (req.body.profileImage != null)
-    res.user.profileImage = req.body.profileImage;
   try {
     const updateUser = await res.user.save();
     res.status(200).send({ message: "User updated successfully." });
