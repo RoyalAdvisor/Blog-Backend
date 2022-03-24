@@ -55,7 +55,7 @@ router.put("/:id", [verifyAcc, retrieveUser], async (req, res) => {
   if (req.body.username != null) res.user.username = req.body.username;
   if (req.body.email != null) res.user.email = req.body.email;
   if (req.body.password != null) {
-    req.user.password = bcrypt.hashSync(req.body.password, 8);
+    req.user.password = bcrypt.hash(req.body.password, 8);
   }
   if (req.body.profileImage != null)
     res.user.profileImage = req.body.profileImage;
