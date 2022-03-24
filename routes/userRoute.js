@@ -53,9 +53,9 @@ router.post("/signin", async (req, res) => {
 //Update
 
 router.put("/:id", [verifyAcc, retrieveUser], async (req, res) => {
-  if (req.body.username) res.user.username = req.body.username;
-  if (req.body.email) res.user.email = req.body.email;
-  if (req.body.profile) res.user.password = req.body.profile;
+  if (req.body.username != null) res.user.username = req.body.username;
+  if (req.body.email != null) res.user.email = req.body.email;
+  if (req.body.profile != null) res.user.profile = req.body.profile;
   try {
     const updateUser = await res.user.save();
     res.status(200).send(updateUser);
