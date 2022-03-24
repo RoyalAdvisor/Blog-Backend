@@ -17,6 +17,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       maxLength: 255,
     },
+    profileImage: {
+      type: String,
+      required: true,
+      default:
+        "https://i.postimg.cc/8cjV8jSx/933-9332131-profile-picture-default-png.jpg",
+    },
   },
   { timestamps: true }
 );
