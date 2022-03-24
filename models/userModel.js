@@ -17,6 +17,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       maxLength: 255,
     },
+    profile: {
+      type: String,
+      required: false,
+      default: "https://postimg.cc/SnLFb5R1",
+    },
   },
   { timestamps: true }
 );

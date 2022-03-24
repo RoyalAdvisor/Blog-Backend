@@ -41,6 +41,7 @@ router.post("/signin", async (req, res) => {
         username: user.username,
         email: user.email,
         access: authToken,
+        profile: user.profile,
       });
     });
   } catch (error) {
@@ -51,11 +52,12 @@ router.post("/signin", async (req, res) => {
 //Update
 
 router.put("/:id", [verifyAcc, retrieveUser], async (req, res) => {
-  if (req.body.username != null) res.user.username = req.body.username;
-  if (req.body.email != null) res.user.email = req.body.email;
+  if (req.body.username) res.user.username = req.body.username;
+  if (req.body.email) res.user.email = req.body.email;
+  if (req.body.profile) res.user.password = req.body.profile;
   try {
     const updateUser = await res.user.save();
-    res.status(200).send({ message: "User updated successfully." });
+    res.status(200).send(updateUser);
   } catch (error) {
     res.status(400).send({ message: error.message });
   }
