@@ -18,7 +18,6 @@ mongoose.connect(process.env.connection, { useNewUrlParser: true }, () => {
 
 app.use("/users", userRoute);
 app.use("/posts", postRoute);
-app.use(cors());
 app.use("/posts", commentRoute);
 app.use("/contact", contactRoute);
 
