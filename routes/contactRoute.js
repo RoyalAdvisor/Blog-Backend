@@ -1,7 +1,5 @@
 const router = require("express").Router();
 const nodemailer = require("nodemailer");
-const dotenv = require("dotenv");
-dotenv.config();
 
 router.post("/", (req, res) => {
   const { email, name, message } = req.body;
@@ -23,7 +21,8 @@ router.post("/", (req, res) => {
         <h3>Don't forget to contact ${name} back at the following email address ${email}.</h3>
       `,
   };
-  transporter.sendMail(mailOptions, function (error) {
+
+  transporter.sendMail(mailOptions, function (error, data) {
     if (error) {
       res.status(400).send({ message: "Email could not be sent." });
     } else {
