@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const userRoute = require("./routes/userRoute");
 const postRoute = require("./routes/postRoute");
 const commentRoute = require("./routes/commentRoute");
+const contactRoute = require("./routes/contactRoute");
 const cors = require("cors");
 
 app.use(cors());
@@ -19,6 +20,7 @@ app.use("/users", userRoute);
 app.use("/posts", postRoute);
 app.use(cors());
 app.use("/posts", commentRoute);
+app.use("/contact", contactRoute);
 
 app.get("/", (req, res) => {
   res.send("Rest API for The Random Blog.");
