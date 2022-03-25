@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
     from: process.env.email,
     to: process.env.email,
     subject: `${name} has sent you a message!`,
-    text: `
+    html: `
         <h1>Here's what they had to say...</h1>
         <p>${message}</p>
 
