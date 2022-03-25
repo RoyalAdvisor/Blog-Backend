@@ -15,10 +15,9 @@ router.post("/", (req, res) => {
     to: process.env.email,
     subject: `${name} has sent you a message!`,
     text: `
-        <h1>Here is what they wanted you to know.</h1>
-        <p>${message}</p>
-
-        <h3>Don't forget to contact ${name} back at the following email address ${email}.</h3>
+        Here is what they wanted you to know.
+        ${message}
+        Don't forget to contact ${name} back at the following email address ${email}.
       `,
   };
 
