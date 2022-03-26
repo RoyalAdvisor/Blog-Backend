@@ -29,15 +29,20 @@ router.post("/signup", verify, async (req, res) => {
       },
     });
     let mailOptions = {
-      from: process.env.email,
+      from: "thementalmind@support.com",
       to: req.body.email,
-      subject: "Welcome to The Mental Mind!",
+      subject: `Welcome to The Mental Mind, ${req.body.username}!`,
       html: `
-        <h2>Thank you for signing up with us ${req.body.username}.</h2>
-        <h4>We're really glad that you chose to join out family and hope that you enjoy blogging with us!</h4>
+        <h2>Hello, it's Nadeem from The Mental Mind.</h2>
+        <h3>Thank you for signing up to my blog site!</h3>
+        <h3>The purpose of this blog is to motivate you through short, powerful messages meant to trigger your thought processes and inspire you.</h3>
+        <h4>I really hope you enjoy using this website, to spread messages of inspiration to those out there who just might need it.</h4>
 
-        <h4>Click the link below to go directly to the sign up page.</h4>
-        <a href="https://thementalmind-c60dd.web.app/signin">Click here!</a>
+        <h4>Happy blogging, ${req.body.username}</h4>
+
+        <h6>Note: Do not reply to this email.</h6>
+
+        <h6>The Mental Mind.</h6>
       `,
     };
     transporter.sendMail(mailOptions, function (err, success) {
@@ -95,15 +100,22 @@ router.put("/:id", [verifyAcc, retrieveUser], async (req, res) => {
       },
     });
     let mailOptions = {
-      from: process.env.email,
+      from: "thementalmind@support.com",
       to: res.user.email,
-      subject: "Your profile has been updated.",
+      subject: `You have updated your profile, ${res.user.username}.`,
       html: `
-        <h2>Hello, ${res.user.username}.</h2>
-        <h4>We've noticed that you have changed your profile.</h4>
+        <h2>Hello there, ${res.user.username}</h2>
+        <h3>It's Nadeem from The Mental Mind. I've noticed that you have updated your profile.</h3>
+        <h3>Because your credentials have changed, the blog is setup to sign you out immediately as your previous credentials are no longer valid.</h3>
+        <h3>This is to protect your personal information and keep the site safe.</h3>
 
-        <h4>Click the link below to go directly to the sign up page.</h4>
-        <a href="https://thementalmind-c60dd.web.app/signin">Click here!</a>
+        <h3>To access the website, just sign in with your new credentials.</h3>
+
+        <h4>Happy blogging, ${res.user.username}</h4>
+
+        <h6>Note: Do not reply to this email.</h6>
+
+        <h6>The Mental Mind.</h6>
       `,
     };
     transporter.sendMail(mailOptions, function (err, success) {
@@ -132,12 +144,22 @@ router.delete("/:id", [verifyAcc, retrieveUser], async (req, res) => {
       },
     });
     let mailOptions = {
-      from: process.env.email,
+      from: `thementalmind@support.com`,
       to: res.user.email,
-      subject: "Your account has been deleted.",
+      subject: `Leaving so soon, ${res.user.username}?`,
       html: `
-        <h2>We really hate to see you go, ${res.user.username}.</h2>
-        <h4>However, we know all good things eventually come to an end. We wish you prosperity moving forward. Thank you for blogging with us!</h4>
+        <h2>Hello there, ${res.user.username}</h2>
+        <h3>It's Nadeem from The Mental Mind. Looks like you've decided to delete your profile.</h3>
+        <h3>I really hate to see you leave but I understand that eventually all good things do come to an end.</h3>
+        <h3>It has really been fun having you blog and share your knowledge with The Mental Mind.</h3>
+
+        <h3>I wish you nothing but prosperity and happiness moving forward, ${res.user.username}.</h3>
+
+        <h4>Thank you for blogging with The Mental Mind.</h4>
+
+        <h6>Note: Do not reply to this email.</h6>
+
+        <h6>The Mental Mind.</h6>
       `,
     };
     transporter.sendMail(mailOptions, function (err, success) {
