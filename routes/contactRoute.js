@@ -2,7 +2,7 @@ const router = require("express").Router();
 const nodemailer = require("nodemailer");
 
 router.post("/", async (req, res) => {
-  let { email, name, message } = req.body;
+  let { email, message } = req.body;
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -14,11 +14,9 @@ router.post("/", async (req, res) => {
   let mailOptions = {
     from: process.env.email,
     to: process.env.email,
-    subject: `${name} has sent you a message!`,
+    subject: `You have a new message from your blog!`,
     html: `
-        <h1>Here's what they had to say...</h1>
-        <p>${message}</p>
-
+        <h3>${message}</h3>
         <h4>Email them back using the following ${email}</h4>
       `,
   };
