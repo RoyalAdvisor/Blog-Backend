@@ -19,9 +19,10 @@ const userSchema = new mongoose.Schema(
     },
     profile: {
       type: String,
-      required: true,
+      required: false,
       maxLength: 1000,
-      default: "",
+      default:
+        "https://i.postimg.cc/VNyjv0h9/User-Profile-PNG-High-Quality-Image.png",
     },
   },
   { timestamps: true }

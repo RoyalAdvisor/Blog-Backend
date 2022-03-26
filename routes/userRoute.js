@@ -18,7 +18,6 @@ router.post("/signup", verify, async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: passEncryption,
-      profile: req.body.profile,
     });
     await newUser.save();
     let transporter = nodemailer.createTransport({
@@ -29,7 +28,7 @@ router.post("/signup", verify, async (req, res) => {
       },
     });
     let mailOptions = {
-      from: "thementalmind@support.com",
+      from: process.env.email,
       to: req.body.email,
       subject: `Welcome to The Mental Mind, ${req.body.username}!`,
       html: `
@@ -100,7 +99,7 @@ router.put("/:id", [verifyAcc, retrieveUser], async (req, res) => {
       },
     });
     let mailOptions = {
-      from: "thementalmind@support.com",
+      from: process.env.email,
       to: res.user.email,
       subject: `You have updated your profile, ${res.user.username}.`,
       html: `
@@ -144,7 +143,7 @@ router.delete("/:id", [verifyAcc, retrieveUser], async (req, res) => {
       },
     });
     let mailOptions = {
-      from: `thementalmind@support.com`,
+      from: process.env.email,
       to: res.user.email,
       subject: `Leaving so soon, ${res.user.username}?`,
       html: `
